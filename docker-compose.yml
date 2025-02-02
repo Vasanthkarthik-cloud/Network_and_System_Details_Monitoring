@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  streamlit-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: streamlit-monitor
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./app:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=OyEKjp11bfbhXjghEc2vqeRRZLhkHrl6wMzFWc6lVEKyKSbC6_96TE3ngq2M5IFOBd50mX2N_jVlJXs7JXsPSQ==
+      - INFLUXDB_ORG=RVCE
+      - INFLUXDB_BUCKET=network
+    depends_on:
+      - influxdb
+    restart: unless-stopped
+
+  influxdb:
+    image: influxdb:2.7
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+      - DOCKER_INFLUXDB_INIT_ORG=RVCE
+      - DOCKER_INFLUXDB_INIT_BUCKET=network
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=OyEKjp11bfbhXjghEc2vqeRRZLhkHrl6wMzFWc6lVEKyKSbC6_96TE3ngq2M5IFOBd50mX2N_jVlJXs7JXsPSQ==
+
+volumes:
+  influxdb-data:

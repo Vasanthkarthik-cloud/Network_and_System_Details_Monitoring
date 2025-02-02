@@ -1,0 +1,8 @@
+streamlit
+psutil
+pandas
+plotly
+st-pages
+influxdb-client
+py-cpuinfo
+jwt

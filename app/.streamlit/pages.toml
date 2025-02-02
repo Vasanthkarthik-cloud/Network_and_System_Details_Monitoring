@@ -1,0 +1,19 @@
+[[pages]]
+path = "Home.py"
+name = "Dashboard"
+icon = "🏠"
+
+[[pages]]
+path = "pages/system_details.py"
+name = "System Details"
+icon = "💻"
+
+[[pages]]
+path = "pages/network_analysis.py"
+name = "Network Analysis"
+icon = "🌐"
+
+[[pages]]
+path = "pages/alerts_history.py"
+name = "Alerts History"
+icon = "⚠️"
